@@ -49,7 +49,7 @@ if(todoModel){
 app.get('/todos/', async (req, res) =>{
     const {status} = req.params;
     console.log('Fetching all todos', status);
-    const todoModel = await TodoModel.find({status:status});
+    const todoModel = await TodoModel.find({});
     if(todoModel){
         res.status(201).json({
             status: true,
@@ -63,6 +63,10 @@ app.get('/todos/', async (req, res) =>{
         })
     }
 })
+
+//getting one todo
+//deleting a todo
+//patching todo
 
 //connecting to MongoDB database
 mongoose.connect(db, {
