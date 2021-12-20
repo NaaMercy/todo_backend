@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 //assigning port number to server
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4050;
 
 //assigning our database url to a variable
 const db = process.env.DB_URL;
@@ -65,6 +65,33 @@ app.get('/todos/', async (req, res) =>{
 })
 
 //getting one todo
+app.get('todos/:id', async (req, res)=> {
+    const{id} = req.params;
+    console.log('Todo feteched succesfully', id)
+    const todoModel = await TodoModel.findById({}, id);
+    if(todoModel){
+        res.status(201).json({
+            status: true,
+            message: "Todo fetched successfully",
+            data:todoModel
+        })
+    }else{
+         res.status(400).json({
+            status: false,
+            message: "Todo was not fetched",
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
+
 //deleting a todo
 //patching todo
 
